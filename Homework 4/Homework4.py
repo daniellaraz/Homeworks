@@ -2,16 +2,7 @@ import random
 import unittest
 
 # SI 206 Fall 2017
-# Homework 3 - Code
-
-##COMMENT YOUR CODE WITH:
-# Section Day/Time: Niharika Thursdays 8:30 AM
-# People you worked with: None
-
-######### DO NOT CHANGE PROVIDED CODE #########
-### Below is the same cards.py code you saw in lecture.
-### Scroll down for assignment instructions.
-#########
+# Homework 3
 
 class Card(object):
 	suit_names =  ["Diamonds","Clubs","Hearts","Spades"]
@@ -20,49 +11,43 @@ class Card(object):
 
 	def __init__(self, suit=0,rank=2):
 		self.suit = self.suit_names[suit]
-		if rank in self.faces: # self.rank handles printed representation
+		if rank in self.faces:
 			self.rank = self.faces[rank]
 		else:
 			self.rank = rank
-		self.rank_num = rank # To handle winning comparison
+		self.rank_num = rank
 
 	def __str__(self):
 		return "{} of {}".format(self.rank,self.suit)
 
 class Deck(object):
-	def __init__(self): # Don't need any input to create a deck of cards
-		# This working depends on Card class existing above
+	def __init__(self): 
 		self.cards = []
 		for suit in range(4):
 			for rank in range(1,14):
 				card = Card(suit,rank)
-				self.cards.append(card) # appends in a sorted order
+				self.cards.append(card) 
 
 	def __str__(self):
 		total = []
 		for card in self.cards:
 			total.append(card.__str__())
-		# shows up in whatever order the cards are in
-		return "\n".join(total) # returns a multi-line string listing each card
+		return "\n".join(total) 
 
 	def pop_card(self, i=-1):
-		# removes and returns a card from the Deck
-		# default is the last card in the Deck
-		return self.cards.pop(i) # this card is no longer in the deck -- taken off
+		return self.cards.pop(i) 
 
 	def shuffle(self):
 		random.shuffle(self.cards)
 
 	def replace_card(self, card):
-		card_strs = [] # forming an empty list
-		for c in self.cards: # each card in self.cards (the initial list)
-			card_strs.append(c.__str__()) # appends the string that represents that card to the empty list
-		if card.__str__() not in card_strs: # if the string representing this card is not in the list already
-			self.cards.append(card) # append it to the list
+		card_strs = [] 
+		for c in self.cards: 
+			card_strs.append(c.__str__())
+		if card.__str__() not in card_strs: 
+			self.cards.append(card)
 
 	def sort_cards(self):
-		# Basically, remake the deck in a sorted way
-		# This is assuming you cannot have more than the normal 52 cars in a deck
 		self.cards = []
 		for suit in range(4):
 			for rank in range(1,14):
@@ -71,7 +56,6 @@ class Deck(object):
 
 
 def play_war_game(testing=False):
-	# Call this with testing = True and it won't print out all the game stuff -- makes it hard to see test results
 	player1 = Deck()
 	player2 = Deck()
 
@@ -116,24 +100,6 @@ if __name__ == "__main__":
 		print("TIE!")
 
 
-######### DO NOT CHANGE CODE ABOVE THIS LINE #########
-
-## You can write any additional debugging/trying stuff out code here...
-## OK to add debugging print statements, but do NOT change functionality of existing code.
-## Also OK to add comments!
-
-#########
-
-
-
-
-
-
-
-##**##**##**##@##**##**##**## # DO NOT CHANGE OR DELETE THIS COMMENT LINE -- we use it for grading your file
-###############################################
-
-### Write unit tests below this line for the cards code above.
 
 
 class CardTests(unittest.TestCase):
@@ -194,6 +160,4 @@ class CardTests(unittest.TestCase):
 
 
 #############
-## The following is a line to run all of the tests you include:
 unittest.main(verbosity=2)
-## verbosity 2 to see detail about the tests the code fails/passes/etc.
